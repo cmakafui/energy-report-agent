@@ -301,7 +301,7 @@ if start_analysis:
                     # Save image data to session state
                     st.session_state.rgb_image_data.append(rgb_img.getvalue())
                     st.session_state.thermal_image_data.append(thermal_img.getvalue())
-                    
+
                     rgb_path = os.path.join(temp_dir, f"rgb_{i}.jpg")
                     thermal_path = os.path.join(temp_dir, f"thermal_{i}.jpg")
                     with open(rgb_path, "wb") as f:
@@ -470,16 +470,23 @@ with tab2:
             with st.expander(f"Image Pair {i + 1}: {summary}", expanded=True):
                 # Add a two-column layout for images and analysis
                 img_col, text_col = st.columns([1, 2])
-                
+
                 with img_col:
                     # Display RGB and thermal images from session state
-                    if i < len(st.session_state.rgb_image_data) and i < len(st.session_state.thermal_image_data):
+                    if i < len(st.session_state.rgb_image_data) and i < len(
+                        st.session_state.thermal_image_data
+                    ):
                         st.subheader("RGB Image")
-                        st.image(st.session_state.rgb_image_data[i], use_container_width=True)
-                        
+                        st.image(
+                            st.session_state.rgb_image_data[i], use_container_width=True
+                        )
+
                         st.subheader("Thermal Image")
-                        st.image(st.session_state.thermal_image_data[i], use_container_width=True)
-                
+                        st.image(
+                            st.session_state.thermal_image_data[i],
+                            use_container_width=True,
+                        )
+
                 with text_col:
                     # Display the full markdown analysis
                     st.markdown(analysis)
@@ -510,10 +517,18 @@ with tab3:
         for i in range(len(st.session_state.rgb_image_data)):
             cols = st.columns(2)
             with cols[0]:
-                st.image(st.session_state.rgb_image_data[i], caption=f"RGB Image {i+1}", width=300)
+                st.image(
+                    st.session_state.rgb_image_data[i],
+                    caption=f"RGB Image {i + 1}",
+                    width=300,
+                )
             with cols[1]:
-                st.image(st.session_state.thermal_image_data[i], caption=f"Thermal Image {i+1}", width=300)
-            
+                st.image(
+                    st.session_state.thermal_image_data[i],
+                    caption=f"Thermal Image {i + 1}",
+                    width=300,
+                )
+
             # Add a separator between image pairs
             if i < len(st.session_state.rgb_image_data) - 1:
                 st.divider()
